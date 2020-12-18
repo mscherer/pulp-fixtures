@@ -1,5 +1,5 @@
 # === Build fixtures (Fedora) =================================================
-FROM quay.io/fedora/fedora:32 AS fedora-build
+FROM quay.io/fedora/fedora:32-x86_64 AS fedora-build
 
 RUN dnf -yq install \
               createrepo \
