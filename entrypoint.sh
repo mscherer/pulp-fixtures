@@ -2,10 +2,16 @@
 
 set -e
 
-STRIPPED_URL=${BASE_URL%/}
+if [[ -n "$BASE_URL" ]]; then
 
-# inject BASE_URL at runtime
-find /usr/share/nginx/html \( -name "*mirrorlist*" -o -name "*.html" -o -name "*.json" \) \
-  -exec sed -i -e "s%http://BASE_URL%$STRIPPED_URL%g" {} +
+    STRIPPED_URL=${BASE_URL%/}
 
-nginx -g 'daemon off;'
+    # inject BASE_URL at runtime
+    find /usr/share/nginx/html \( -name "*mirrorlist*" -o -name "*.html" -o -name "*.json" \) \
+      -exec sed -i -e "s%http://BASE_URL%$STRIPPED_URL%g" {} +
+
+fi
+
+if [[ -z "$NO_NGINX" ]]; then
+    nginx -g 'daemon off;'
+fi;
