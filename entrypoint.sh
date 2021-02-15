@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 if [[ ! -f /usr/share/nginx/html/base_url_fixed ]] && [[ -n "$BASE_URL" ]]; then
 
